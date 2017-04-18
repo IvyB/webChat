@@ -1,0 +1,39 @@
+body{
+    background: #66CCFF;
+    text-align: center;
+}
+.frame{
+    margin: 50px auto;
+    width: 500px;
+    height: 550px;
+
+    text-align: center;
+}
+.header{
+    width: 500px;
+    height: 50px;
+    margin: auto;
+}
+.header span{
+    font-size: 30px;
+    color: white;
+}
+.msg{
+    width: 450px;
+    height: 300px;
+    margin: 20px auto;
+    overflow-y:scroll;
+
+    background: #FFFFFF;
+    text-align: left;
+}
+.txt{
+    width: 450px;
+    height: 130px;
+    margin: auto;
+    background: #FFFFFF;
+}
+#send{
+    margin-top: 0px;
+    margin-left: 400px;
+}

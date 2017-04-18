@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>van`s chat room</title>
+    <link rel="stylesheet" href="css/css.css" type="text/css" />
+</head>
+<body>
+
+<div class="frame">
+    <div class="header">
+        <span>Tong`s chat room</span>
+
+    </div>
+    <div class="msg" id="messages" >
+
+    </div>
+    <div class="txt">
+        <textarea id="text" rows="6"  style="resize:none;width:98.7%"></textarea>
+        <input type="button" id="send" value="发送" onclick="hasshinn()"/>
+    </div>
+    <br/> <br/>
+    <div><input type="text" id="name"> <br/><br/> <input type="button" value="更改昵称" onclick="change()"></div>
+    <br/><center>@+用户名私聊；#list打出在线账户</center>
+</div>
+<script type="application/javascript">
+    var socket = new WebSocket('ws://localhost:8083/webchat/deep');
+
+    socket.onopen = function(event){} ;
+
+
+    socket.onmessage = function(message){
+        //console.log('Client received a message'+message.data);
+        document.getElementById('messages').innerHTML =
+            document.getElementById('messages').innerHTML + message.data + '\n';
+        document.getElementById('messages').scrollTop=100000;
+    };
+
+    socket.onclose = function(){
+        //console.log('Client notified socket has closed');
+    };
+</script>
+
+<script type="application/javascript">
+    function hasshinn(){
+        //alert(document.getElementById('text').value);
+        socket.send(document.getElementById('text').value);
+        document.getElementById('text').value = "";
+        document.getElementById('messages').scrollTop=1000;
+    }
+</script>
+<script type="text/javascript" language=JavaScript charset="UTF-8">
+    document.onkeydown=function(event){
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if(e && e.keyCode==13){
+            hasshinn();
+            document.getElementById('text').innerHTML = "";
+
+        }
+        document.getElementById('text').innerHTML = "";
+    };
+</script>
+<script type="application/javascript">
+    function change(){
+        socket.send("USER "+document.getElementById('name').value);
+    }
+</script>
+</html>
